@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
 
   # GET /items/1
   def show
-    render json: item
+    rrender json: ItemSerializer.new(items)
   end
 
   # POST /items
@@ -19,7 +19,7 @@ class ItemsController < ApplicationController
     item = Item.new(item_params)
 
     if item.save
-      render json: item, status: :created, location: item
+      render json: ItemSerializer.new(items), status: :created, location: item
     else
       render json: item.errors, status: :unprocessable_entity
     end
@@ -28,7 +28,7 @@ class ItemsController < ApplicationController
   # PATCH/PUT /items/1
   def update
     if item.update(item_params)
-      render json: item
+      render json: ItemSerializer.new(items)
     else
       render json: item.errors, status: :unprocessable_entity
     end
