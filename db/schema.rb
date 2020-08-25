@@ -10,21 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_25_002323) do
+ActiveRecord::Schema.define(version: 2020_08_25_195820) do
 
-  create_table "drinks", force: :cascade do |t|
+  create_table "categories", force: :cascade do |t|
     t.string "name"
-    t.text "notes"
-    t.boolean "alcoholic"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "main_courses", force: :cascade do |t|
+  create_table "items", force: :cascade do |t|
     t.string "name"
-    t.text "notes"
+    t.integer "Category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["Category_id"], name: "index_items_on_Category_id"
   end
 
   create_table "parties", force: :cascade do |t|
@@ -34,27 +33,13 @@ ActiveRecord::Schema.define(version: 2020_08_25_002323) do
   end
 
   create_table "party_plans", force: :cascade do |t|
-    t.integer "party_id", null: false
-    t.integer "main_course_id"
-    t.integer "snack_id"
-    t.integer "drink_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["drink_id"], name: "index_party_plans_on_drink_id"
-    t.index ["main_course_id"], name: "index_party_plans_on_main_course_id"
-    t.index ["party_id"], name: "index_party_plans_on_party_id"
-    t.index ["snack_id"], name: "index_party_plans_on_snack_id"
-  end
-
-  create_table "snacks", force: :cascade do |t|
-    t.string "name"
+    t.integer "Party_id"
+    t.integer "Item_id"
     t.text "notes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["Item_id"], name: "index_party_plans_on_Item_id"
+    t.index ["Party_id"], name: "index_party_plans_on_Party_id"
   end
 
-  add_foreign_key "party_plans", "drinks"
-  add_foreign_key "party_plans", "main_courses"
-  add_foreign_key "party_plans", "parties"
-  add_foreign_key "party_plans", "snacks"
 end

@@ -6,8 +6,24 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-MainCourse.create(name: "Pizza", notes: "Extra Cheesey")
-Snack.create(name: "Nachos", notes: "Extra Cheesey")
-Drink.create(name: "Soda Pop", notes: "No Coke, Pepsi")
+
 Party.create(title: "Pizza Party")
-PartyPlan.create(party_id: 1, main_course_id: 1, snack_id: 1, drink_id: 1)
+
+
+
+Category.create(name: "Main Courses")
+Category.create(name: "Snacks")
+Category.create(name: "Non-Alcoholic Drinks")
+Category.create(name: "Alcoholic Drinks")
+Category.create(name: "Music")
+Category.create(name: "Movies")
+Category.create(name: "TV Shows")
+Category.create(name: "Games")
+Category.create(name: "Costumes")
+Category.create(name: "Decorations")
+Category.create(name: "Games")
+Category.create(name: "Games")
+# Item.create(name: "Pizza", category_id: 1)
+# Item.create(name: "Nachos", category_id: 2)
+# Item.create(name: "Soda Pop", category_id: 4)
+# PartyPlan.create(party_id: 1, main_course_id: 1, snack_id: 1, drink_id: 1)

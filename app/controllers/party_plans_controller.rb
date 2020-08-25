@@ -15,7 +15,7 @@ class PartyPlansController < ApplicationController
 
   # POST /party_plans
   def create
-    @party_plan = PartyPlan.new(plan_params)
+    @party_plan = PartyPlan.new(party_plan_params)
 
     if @party_plan.save
       render json: @party_plan, status: :created, location: @party_plan
@@ -26,7 +26,7 @@ class PartyPlansController < ApplicationController
 
   # PATCH/PUT /party_plans/1
   def update
-    if @party_plan.update(plan_params)
+    if @party_plan.update(party_plan_params)
       render json: @party_plan
     else
       render json: @party_plan.errors, status: :unprocessable_entity
@@ -46,6 +46,6 @@ class PartyPlansController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def party_plan_params
-      params.require(:plan).permit(:party_id, :main_course_id, :snack_id, :drink_id)
+      params.require(:party_plan).permit(:Party, :Item, :notes)
     end
 end
