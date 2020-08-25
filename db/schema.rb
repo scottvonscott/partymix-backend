@@ -33,17 +33,17 @@ ActiveRecord::Schema.define(version: 2020_08_25_002323) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "plans", force: :cascade do |t|
+  create_table "party_plans", force: :cascade do |t|
     t.integer "party_id", null: false
     t.integer "main_course_id"
     t.integer "snack_id"
     t.integer "drink_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["drink_id"], name: "index_plans_on_drink_id"
-    t.index ["main_course_id"], name: "index_plans_on_main_course_id"
-    t.index ["party_id"], name: "index_plans_on_party_id"
-    t.index ["snack_id"], name: "index_plans_on_snack_id"
+    t.index ["drink_id"], name: "index_party_plans_on_drink_id"
+    t.index ["main_course_id"], name: "index_party_plans_on_main_course_id"
+    t.index ["party_id"], name: "index_party_plans_on_party_id"
+    t.index ["snack_id"], name: "index_party_plans_on_snack_id"
   end
 
   create_table "snacks", force: :cascade do |t|
@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(version: 2020_08_25_002323) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "plans", "drinks"
-  add_foreign_key "plans", "main_courses"
-  add_foreign_key "plans", "parties"
-  add_foreign_key "plans", "snacks"
+  add_foreign_key "party_plans", "drinks"
+  add_foreign_key "party_plans", "main_courses"
+  add_foreign_key "party_plans", "parties"
+  add_foreign_key "party_plans", "snacks"
 end

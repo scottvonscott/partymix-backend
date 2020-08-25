@@ -1,6 +1,6 @@
-class CreatePlans < ActiveRecord::Migration[6.0]
+class CreatePartyPlans < ActiveRecord::Migration[6.0]
   def change
-    create_table :plans do |t|
+    create_table :party_plans do |t|
       t.references :party, null:false, foreign_key: true
       t.references :main_course, null:true, foreign_key: true
       t.references :snack, null:true, foreign_key: true

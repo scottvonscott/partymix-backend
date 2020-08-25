@@ -1,3 +1,3 @@
 class MainCourse < ApplicationRecord
-    has_many :plans
+    has_many :party_plans
 end
