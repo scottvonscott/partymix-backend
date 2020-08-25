@@ -46,6 +46,6 @@ class PlansController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def plan_params
-      params.fetch(:plan, {})
+      params.require(:plan).permit(:party_id, :main_course_id, :snack_id, :drink_id)
     end
 end
