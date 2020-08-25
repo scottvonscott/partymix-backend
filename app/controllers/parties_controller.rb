@@ -10,6 +10,7 @@ class PartiesController < ApplicationController
 
   # GET /parties/1
   def show
+    
     render json: party
   end
 
