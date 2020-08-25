@@ -20,10 +20,10 @@ ActiveRecord::Schema.define(version: 2020_08_25_195820) do
 
   create_table "items", force: :cascade do |t|
     t.string "name"
-    t.integer "Category_id"
+    t.integer "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["Category_id"], name: "index_items_on_Category_id"
+    t.index ["category_id"], name: "index_items_on_category_id"
   end
 
   create_table "parties", force: :cascade do |t|
@@ -33,13 +33,16 @@ ActiveRecord::Schema.define(version: 2020_08_25_195820) do
   end
 
   create_table "party_plans", force: :cascade do |t|
-    t.integer "Party_id"
-    t.integer "Item_id"
+    t.integer "party_id", null: false
+    t.integer "item_id", null: false
     t.text "notes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["Item_id"], name: "index_party_plans_on_Item_id"
-    t.index ["Party_id"], name: "index_party_plans_on_Party_id"
+    t.index ["item_id"], name: "index_party_plans_on_item_id"
+    t.index ["party_id"], name: "index_party_plans_on_party_id"
   end
 
+  add_foreign_key "items", "categories"
+  add_foreign_key "party_plans", "items"
+  add_foreign_key "party_plans", "parties"
 end
