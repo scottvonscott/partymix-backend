@@ -5,13 +5,17 @@ class PartiesController < ApplicationController
   def index
     parties = Party.all
 
-    render json: parties
+    # render json: parties
+    options = { 
+      include: [:items]
+    }
+    render json: PartySerializer.new(parties, options)
   end
 
   # GET /parties/1
   def show
     
-    render json: party
+    render json: @party
   end
 
   # POST /parties
@@ -27,22 +31,22 @@ class PartiesController < ApplicationController
 
   # PATCH/PUT /parties/1
   def update
-    if party.update(party_params)
-      render json: party
+    if @party.update(party_params)
+      render json: @party
     else
-      render json: party.errors, status: :unprocessable_entity
+      render json: @party.errors, status: :unprocessable_entity
     end
   end
 
   # DELETE /parties/1
   def destroy
-    party.destroy
+    @party.destroy
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_party
-      party = Party.find(params[:id])
+      @party = Party.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
