@@ -6,10 +6,12 @@ class PartiesController < ApplicationController
     parties = Party.all
 
     # render json: parties
-    options = { 
-      include: [:items]
-    }
-    render json: PartySerializer.new(parties, options)
+    render json: PartySerializer.new(parties)
+    # options = { 
+    #   include: [:items]
+    # }
+    # render json: PartySerializer.new(parties, options)
+  
   end
 
   # GET /parties/1
@@ -23,7 +25,7 @@ class PartiesController < ApplicationController
     party = Party.new(party_params)
 
     if party.save
-      render json: party, status: :created, location: party
+      render json: PartySerializer.new(party)
     else
       render json: party.errors, status: :unprocessable_entity
     end
