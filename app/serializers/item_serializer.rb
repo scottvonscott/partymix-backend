@@ -1,9 +1,6 @@
 class ItemSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :name
+  attributes :name, :id, :category
 
-    attributes :categories do |object|
-    categories = []
-    categories << object.category
-  end
+
 end

@@ -4,14 +4,7 @@ class PartiesController < ApplicationController
   # GET /parties
   def index
     parties = Party.all
-
-    # render json: parties
     render json: PartySerializer.new(parties)
-    # options = { 
-    #   include: [:items]
-    # }
-    # render json: PartySerializer.new(parties, options)
-  
   end
 
   # GET /parties/1

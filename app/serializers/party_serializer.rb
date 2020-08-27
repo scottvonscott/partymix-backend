@@ -1,12 +1,9 @@
 class PartySerializer
   include FastJsonapi::ObjectSerializer
-  attributes :title
-  # attributes :items do |object|
-  #   items = []
-  #   items << object.items
-  # end
-  
-  has_many :items
-
+  attributes :title, :id
+  attribute :items do |object|
+    byebug
+    "#{object.items} (#{object.items.category.name})"
+  end
 
 end
