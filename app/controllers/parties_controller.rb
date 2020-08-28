@@ -43,6 +43,8 @@ class PartiesController < ApplicationController
   # DELETE /parties/1
   def destroy
     @party.destroy
+    render json: {message: "#{@party.title} has been delete!"}
+
   end
 
   private
