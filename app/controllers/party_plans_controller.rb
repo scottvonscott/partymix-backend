@@ -15,10 +15,17 @@ class PartyPlansController < ApplicationController
 
   # POST /party_plans
   def create
-    party_plan = PartyPlan.new(party_plan_params)
-
-    if party_plan.save
-      render json: party_plan, status: :created, location: party_plan
+    party = Party.new(party_params)
+    if party.save
+    params[:items].each do |i|
+      item = Item.new(name: i[:name], category_id: i[:category_id])
+      item.save
+      party_plan = PartyPlan.new(party: party, item: item)
+      party_plan.save
+    end
+  end
+    if party.save
+      render json: PartySerializer.new(party)
     else
       render json: party_plan.errors, status: :unprocessable_entity
     end
@@ -45,7 +52,12 @@ class PartyPlansController < ApplicationController
     end
 
     # Only allow a trusted parameter "white list" through.
+
+    def party_params
+      params.permit(:title)
+    end
+
     def party_plan_params
-      params.require(:party_plan).permit(:Party, :Item, :notes)
+      params.require(:items).permit(:name, :category_id)
     end
 end

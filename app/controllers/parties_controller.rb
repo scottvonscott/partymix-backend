@@ -15,6 +15,7 @@ class PartiesController < ApplicationController
 
   # POST /parties
   def create
+    byebug
     party = Party.new(party_params)
 
     if party.save
@@ -46,6 +47,6 @@ class PartiesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def party_params
-      params.require(:party).permit(:title)
+      params.require(:party).permit(:title, items: [:mainCourse,])
     end
 end
