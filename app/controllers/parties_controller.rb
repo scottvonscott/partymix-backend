@@ -15,13 +15,19 @@ class PartiesController < ApplicationController
 
   # POST /parties
   def create
-    byebug
     party = Party.new(party_params)
-
+    if party.save
+    params[:items].each do |i|
+      item = Item.new(name: i[:name], category_id: i[:category_id])
+      item.save
+      party_plan = PartyPlan.new(party: party, item: item)
+      party_plan.save
+    end
+  end
     if party.save
       render json: PartySerializer.new(party)
     else
-      render json: party.errors, status: :unprocessable_entity
+      render json: party_plan.errors, status: :unprocessable_entity
     end
   end
 
@@ -47,6 +53,6 @@ class PartiesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def party_params
-      params.require(:party).permit(:title, items: [:mainCourse,])
+      params.permit(:title)
     end
 end
