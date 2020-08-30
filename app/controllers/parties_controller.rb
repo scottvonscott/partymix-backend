@@ -17,20 +17,7 @@ class PartiesController < ApplicationController
   def create
     party = Party.new(party_params)
     if party.save
-          x = 0
-        params[:newItems][0].values.each do |items|
-          cat = params[:newItems][0].keys[x].to_i
-          x += 1
-          items.each do |item|
-          item = Item.new(name: item, category_id: cat)
-      # item = Item.new(name: i[:name], category_id: i[:category_id])
-          item.save
-          party_plan = PartyPlan.new(party: party, item: item)
-          party_plan.save
-          end
-        end
-    end
-    if party.save
+      party = Party.create_plans(party, params)
       render json: PartySerializer.new(party)
     else
       render json: party_plan.errors, status: :unprocessable_entity
