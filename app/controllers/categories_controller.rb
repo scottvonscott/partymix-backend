@@ -4,10 +4,10 @@ class CategoriesController < ApplicationController
   # GET /categories
   def index
     categories = Category.all
-    options = { 
-      include: [:items]
-    }
-    render json: CategorySerializer.new(categories, options)
+    # options = { 
+    #   include: [:items]
+    # }
+    render json: CategorySerializer.new(categories)
   end
 
   # GET /categories/1
